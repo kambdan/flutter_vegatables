@@ -1,0 +1,35 @@
+{
+    "items": [
+      {
+        "category": "Vegetales",
+        "quantity": 3,
+        "image": "assets/vegetales.png"
+      },
+      {
+        "category": "Frutas",
+        "quantity": 32,
+        "image": "assets/frutas.png"
+      },
+      {
+        "category": "Pan",
+        "quantity": 22,
+        "image": "assets/pan.png"
+      },
+      {
+        "category": "Dulces",
+        "quantity": 56,
+        "image": "assets/dulces.png"
+      },
+      {
+        "category": "Bebidas",
+        "quantity": 10,
+        "image": "assets/bebidas.png"
+      },
+      {
+        "category": "Pasta",
+        "quantity": 50,
+        "image": "assets/pasta.png"
+      }
+    ]
+  }
+  
