@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_delivery/features/welcome/presentation/utils/color.dart';
-import 'package:get/route_manager.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -37,7 +36,7 @@ class CustomButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
 
-       Get.toNamed("/home");
+       Navigator.pushNamed(context, '/home');
 
           // Acción al presionar el botón
         },

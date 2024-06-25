@@ -1,9 +1,12 @@
-import 'package:flutter_application_delivery/features/home/presentation/pages/home_page.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+// Importa Flutter y las páginas que usarás
+import 'package:flutter/material.dart';
 
-routes() => [
-      GetPage(
-          name: "/home",
-          page: () => const HomePage(),
-      )
-];
+import '../features/home/presentation/pages/home_page_provider.dart';
+import '../features/welcome/presentation/pages/welcome_page.dart';
+
+class AppRoutes {
+  static Map<String, WidgetBuilder> routes = {
+    '/': (context) => const WelcomePage(),
+    '/home': (context) => const HomePageProvider(),
+  };
+}

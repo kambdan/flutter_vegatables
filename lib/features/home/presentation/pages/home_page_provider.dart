@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_delivery/features/home/presentation/provider/product_provider.dart';
 import 'package:flutter_application_delivery/shared/colors.dart';
 import 'package:flutter_application_delivery/shared/text_styles.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../shared/custom_app_bar.dart';
-import '../controllers/product_controller.dart';  // Asegúrate de que la ruta sea correcta
+// Asegúrate de que la ruta sea correcta
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageProvider extends StatefulWidget {
+  const HomePageProvider({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageProvider> createState() => _HomePageProviderState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageProviderState extends State<HomePageProvider> {
   int _selectedIndex = 0; // Añade esta línea
 
   void _onItemTapped(int index) {
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  final ProductController controller = Get.find<ProductController>();
+
 
   TextEditingController searchController = TextEditingController();
 
@@ -73,8 +74,10 @@ class _HomePageState extends State<HomePage> {
 
   Expanded cardProducts() {
     return Expanded(
-            child: Obx(() => GridView.builder(
-              itemCount: controller.filteredProducts.length,  // Asegúrate de actualizar según tu controlador
+            child: Consumer<ProductProvider>(
+              builder: (context, productProvider, child){
+              return GridView.builder(
+              itemCount: productProvider.filteredProducts.length,  // Asegúrate de actualizar según tu controlador
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Dos elementos por fila
                 childAspectRatio: 1, // Ratio del tamaño del item (ancho / alto)
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 10, // Espacio vertical entre los elementos
               ),
               itemBuilder: (context, index) {
-                final item = controller.filteredProducts[index];  // Usando productos filtrados
+                final item = productProvider.filteredProducts[index];  // Usando productos filtrados
                 return Container(
                   
                   decoration: BoxDecoration(
@@ -109,7 +112,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-            )),
+            );
+            })
           );
   }
 
@@ -138,7 +142,9 @@ class _HomePageState extends State<HomePage> {
             borderSide: const BorderSide(color: Colors.black38, width: 2.0),  // Color del borde cuando el TextField está enfocado
           ),
         ),
-        onChanged: (value) => controller.searchProduct(value.toLowerCase()),
+        onChanged: (value){
+          Provider.of<ProductProvider>(context, listen: false).searchProduct(value.toLowerCase());
+        },
       ),
     ),
   );
