@@ -13,9 +13,9 @@ void main() {
       providers: [
         // Primero, proporcionamos el ProductRepository
         Provider<ProductRepository>(
-          create: (_) => ProductImpl(), // Asume que tienes esta implementación
+          create: (_) => ProductImpl(), 
         ),
-        // Luego, usamos el ProductRepository para crear el ProductProvider
+        // Permite la inyección de dependencias
         ChangeNotifierProxyProvider<ProductRepository, ProductProvider>(
           create: (context) => ProductProvider(
             repo: context.read<ProductRepository>(),
@@ -23,7 +23,6 @@ void main() {
           update: (context, repo, previous) => 
             previous ?? ProductProvider(repo: repo),
         ),
-        // Añade aquí otros providers si los necesitas
       ],
       child: const MyApp(),
     ),
